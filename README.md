@@ -256,3 +256,21 @@ TMDB_API_TOKEN=your_token_here
 
 4. Sync the Gradle project.
 5. Build and run the application on an Android device or emulator.
+
+## Screenshots
+
+### Dark Theme
+
+<img width="260" height="500" alt="9db526eb-9278-4349-9a65-849b72571a9c" src="https://github.com/user-attachments/assets/0817f8b8-4320-4fb0-baeb-1ea4c45824e7" />
+<img width="260" height="500" alt="8adfbd37-c5c6-45af-9a85-3e3ef6ac26b3" src="https://github.com/user-attachments/assets/a3edb74b-edb0-4064-873d-fbef4755879a" />
+<img width="260" height="500" alt="e2a70351-381f-4f2c-8e32-224b0d7a07a8" src="https://github.com/user-attachments/assets/5b99094c-1524-4540-9553-cbbe75f9ff17" />
+<img width="260" height="500" alt="17d2a456-9a99-4217-8840-d7db2e16d1e0" src="https://github.com/user-attachments/assets/f2dd8ebb-5096-4ada-b0cb-290a70eb0449" />
+
+### Light Theme
+
+<img width="260" height="500" alt="3d9a938e-88d8-4292-881c-6bc417325929" src="https://github.com/user-attachments/assets/9ecc9b49-a5b4-4ed0-b484-bd7ce4b3c7e4" />
+<img width="260" height="500" alt="2ae44ca6-f734-42af-b7c2-31acf05aaf20" src="https://github.com/user-attachments/assets/3129acb2-69ec-4be5-92f8-f79523eae77a" />
+<img width="260" height="500" alt="a95681ab-3311-44da-888e-ffb3a081f649" src="https://github.com/user-attachments/assets/28a33f23-6aa3-4c92-8c83-9848b032d4e8" />
+<img width="260" height="500" alt="a9dda6c7-507a-4ea4-bcce-8bc89816b882" src="https://github.com/user-attachments/assets/06c352dc-3076-4ecb-a308-ed004fb5e10b" />
+
+
