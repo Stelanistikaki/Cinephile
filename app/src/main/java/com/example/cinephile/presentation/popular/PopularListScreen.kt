@@ -2,6 +2,7 @@ package com.example.cinephile.presentation.popular
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,27 +59,10 @@ fun PopularListScreen(
 
     PaginationEffect(listState = listState, onLoadNextPage = viewModel::loadNextPage)
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Cinephilé",
-                        style = MaterialTheme.typography.headlineLarge,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
-            )
-        }
-    ) { paddingValues ->
-        Box(
+    Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(16.dp)
         ) {
             when {
                 uiState.isLoading -> LoadingScreen()
@@ -98,7 +82,6 @@ fun PopularListScreen(
             }
         }
     }
-}
 
 @Composable
 private fun PaginationEffect(
@@ -140,6 +123,7 @@ private fun ErrorScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Title()
         ErrorContent(
             error = error,
             onRetry = onRetry
@@ -160,8 +144,13 @@ private fun MovieListContent(
     LazyColumn(
         state = listState,
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(bottom = 16.dp)
+        contentPadding = PaddingValues(bottom = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        item {
+            Title()
+        }
+
         stickyHeader {
             MovieSearchBar(
                 query = searchQuery,
@@ -197,8 +186,8 @@ private fun MovieSearchBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface)
             .padding(horizontal = 16.dp, vertical = 8.dp)
+            .border(width = 1.dp, color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(16.dp))
     ) {
         OutlinedTextField(
             value = query,
@@ -239,4 +228,15 @@ private fun PaginationLoadingItem() {
             color = MaterialTheme.colorScheme.primary
         )
     }
+}
+
+@Composable
+private fun Title() {
+    Text(
+        modifier = Modifier.padding(vertical = 16.dp),
+        text = "Cinephilé",
+        style = MaterialTheme.typography.headlineLarge,
+        fontWeight = FontWeight.ExtraBold,
+        color = MaterialTheme.colorScheme.primary
+    )
 }
