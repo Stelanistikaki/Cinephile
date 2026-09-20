@@ -42,7 +42,7 @@ class MovieListViewModel @Inject constructor(
 
     private suspend fun loadPopularMovies() {
         _uiState.update {
-            it.copy(isLoading = false, error = null)
+            it.copy(isLoading = true, error = null)
         }
 
         try {
@@ -52,6 +52,7 @@ class MovieListViewModel @Inject constructor(
 
             _uiState.update {
                 it.copy(
+                    isLoading = false,
                     movies = result.items,
                     pagination = _uiState.value.pagination.copy(
                         currentPage = result.page,

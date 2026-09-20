@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.example.cinephile.presentation.navigation.AppNavGraph
+import com.example.cinephile.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -17,7 +18,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            AppNavGraph()
+            AppTheme {
+                AppNavGraph()
+            }
         }
     }
 }

@@ -60,18 +60,20 @@ fun PopularListScreen(
     PaginationEffect(listState = listState, onLoadNextPage = viewModel::loadNextPage)
 
     Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            when {
-                uiState.isLoading -> LoadingScreen()
-                uiState.error != null -> ErrorScreen(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        when {
+            uiState.error != null && uiState.movies.isEmpty() -> {
+                ErrorScreen(
                     error = uiState.error!!,
                     onRetry = viewModel::retry
                 )
+            }
 
-                else -> MovieListContent(
+            else -> {
+                MovieListContent(
                     uiState = uiState,
                     searchQuery = searchQuery,
                     listState = listState,
@@ -82,6 +84,7 @@ fun PopularListScreen(
             }
         }
     }
+}
 
 @Composable
 private fun PaginationEffect(
@@ -97,19 +100,6 @@ private fun PaginationEffect(
                     onLoadNextPage()
                 }
             }
-    }
-}
-
-@Composable
-private fun LoadingScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        CircularProgressIndicator(
-            color = MaterialTheme.colorScheme.primary,
-            strokeWidth = 4.dp
-        )
     }
 }
 
@@ -158,6 +148,17 @@ private fun MovieListContent(
             )
         }
 
+        if (uiState.isLoading && uiState.movies.isEmpty()) {
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(32.dp),
+                    contentAlignment = Alignment.Center
+                ) { CircularProgressIndicator(color = MaterialTheme.colorScheme.primary) }
+            }
+        }
+
         items(
             items = uiState.movies,
             key = { movie -> movie.id }
@@ -165,8 +166,12 @@ private fun MovieListContent(
             PopularItem(
                 item = movie,
                 isFavourite = movie.id in uiState.favouriteMovieIds,
-                onClick = { onMovieClick(movie.id) },
-                onFavoriteClick = { onFavoriteClick(movie) }
+                onClick = {
+                    onMovieClick(movie.id)
+                },
+                onFavoriteClick = {
+                    onFavoriteClick(movie)
+                }
             )
         }
 
@@ -187,7 +192,11 @@ private fun MovieSearchBar(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
-            .border(width = 1.dp, color = MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(16.dp))
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.primary,
+                shape = RoundedCornerShape(16.dp)
+            )
     ) {
         OutlinedTextField(
             value = query,
